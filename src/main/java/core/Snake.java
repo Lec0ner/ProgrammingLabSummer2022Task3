@@ -65,4 +65,34 @@ public class Snake {
     public Point getHead() {
         return snake.get(0);
     }
+
+    public int getSize() {
+        return snake.size();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Snake)) return false;
+
+        Snake snake1 = (Snake) o;
+
+        if (!snake.equals(snake1.snake)) return false;
+        return direction == snake1.direction;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = snake.hashCode();
+        result = 31 * result + (direction != null ? direction.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Snake{" +
+                "snake=" + snake +
+                ", direction=" + direction +
+                '}';
+    }
 }

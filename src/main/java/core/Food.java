@@ -24,4 +24,26 @@ public class Food {
     public Point getCoordinate() {
         return coordinate;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Food)) return false;
+
+        Food food = (Food) o;
+
+        return Objects.equals(coordinate, food.coordinate);
+    }
+
+    @Override
+    public int hashCode() {
+        return coordinate != null ? coordinate.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "coordinate=" + coordinate +
+                '}';
+    }
 }

@@ -4,6 +4,8 @@ import java.awt.*;
 import java.util.List;
 
 public class Game {
+
+    public static int SCORE_PER_FOOD = 10;
     // Размеры поля
     public static int COLUMNS = 20;
     public static int ROWS = 20;
@@ -28,7 +30,7 @@ public class Game {
             snake.eatFood();
             // Создали еду
             food.generateNewFood(snake.getSnake());
-            score += 10;
+            score += SCORE_PER_FOOD;
         }
     }
 
@@ -48,7 +50,41 @@ public class Game {
         return snake.checkGameOver();
     }
 
+    public boolean gameIsWin() {
+        return snake.getSize() > COLUMNS * ROWS - 1;
+    }
+
+
     public int getScore() {
         return score;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Game)) return false;
+
+        Game game = (Game) o;
+
+        if (score != game.score) return false;
+        if (!snake.equals(game.snake)) return false;
+        return food.equals(game.food);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = snake.hashCode();
+        result = 31 * result + food.hashCode();
+        result = 31 * result + score;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "snake=" + snake +
+                ", food=" + food +
+                ", score=" + score +
+                '}';
     }
 }

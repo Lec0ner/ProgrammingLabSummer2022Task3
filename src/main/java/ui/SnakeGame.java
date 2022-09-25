@@ -20,8 +20,7 @@ import javafx.util.Duration;
 
 import java.awt.Point;
 
-import static java.lang.Math.min;
-import static java.lang.Math.pow;
+import static java.lang.Math.*;
 
 public class SnakeGame extends Application {
     // Настройки окна
@@ -29,7 +28,7 @@ public class SnakeGame extends Application {
     private static final int HEIGHT = 800;
     private GraphicsContext graphicsContext;
     // Размер одной ячейки
-    private static final int squareSize = WIDTH / min(Game.ROWS, Game.COLUMNS);
+    private static final int squareSize = WIDTH / max(Game.ROWS, Game.COLUMNS);
     // Картинка еды
     private static final Image foodImage = new Image("food.png");
     // Для воспроизведения цикла игры
@@ -71,6 +70,13 @@ public class SnakeGame extends Application {
             graphicsContext.setFill(Color.web("ea3700"));
             graphicsContext.setFont(new Font("Arial", 70));
             graphicsContext.fillText("Game Over", 200, 400);
+            return;
+        }
+        if (game.gameIsWin()){
+            timeLine.stop();
+            graphicsContext.setFill(Color.web("4DFF00"));
+            graphicsContext.setFont(new Font("Arial", 70));
+            graphicsContext.fillText("Game Win", 200, 400);
             return;
         }
         // Коррекция таймера относительно очков
